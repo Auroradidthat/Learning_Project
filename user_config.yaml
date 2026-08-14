@@ -1,0 +1,88 @@
+# Lesson Configuration
+# Holds per-lesson state: topic, scenario, progress.
+# The template (lesson-plan-prompt-template-v17.1.0.md) holds the fixed rules.
+# Update this file each lesson; the template should rarely change.
+
+course:
+  name: "JavaScript Fundamentals"
+  learner: "Aurora"
+  template_version: "17.1.0"
+
+learning_map:
+  tiers:
+    - name: "Foundations"
+      topics:
+        - {n: 1, name: "Syntax & console", status: complete}
+        - {n: 2, name: "Variables & data types", status: complete}
+        - {n: 3, name: "Operators & expressions", status: complete}
+        - {n: 4, name: "Conditionals", status: complete}
+        - {n: 5, name: "Loops", status: complete}
+        - {n: 6, name: "Functions", status: not_started}
+    - name: "Data & functions"
+      topics:
+        - {n: 7,  name: "Strings & templates", status: not_started}
+        - {n: 8,  name: "Arrays & indexing", status: not_started}
+        - {n: 9,  name: "Objects", status: not_started}
+        - {n: 10, name: "Array methods", status: not_started}
+        - {n: 11, name: "Destructuring", status: not_started}
+        - {n: 12, name: "Scope & closures", status: not_started}
+    - name: "Async & browser"
+      topics:
+        - {n: 13, name: "this & context", status: not_started}
+        - {n: 14, name: "Classes", status: not_started}
+        - {n: 15, name: "Error handling", status: not_started}
+        - {n: 16, name: "DOM & events", status: not_started}
+        - {n: 17, name: "Async & promises", status: not_started}
+        - {n: 18, name: "Fetch & JSON APIs", status: not_started}
+
+current_lesson:
+  topic_n: 6
+  topic_name: "Functions"
+  status: not_started
+
+completed_lessons:
+  topic_5_loops:
+    concepts:
+      - {n: 1, name: "for", status: complete, note: "Required extra explanation on the three-slot for(...) shape and the < vs <= boundary distinction before it landed. Ran a supplementary 3-exercise boundary drill outside the normal concept structure to solidify < vs <= as a loop-stopping condition — all three completed correctly."}
+      - {n: 2, name: "while", status: complete, note: "Missing-step infinite-loop debugging exercise solved correctly on first attempt."}
+      - {n: 3, name: "for...of", status: complete, note: "Needed correction on array-vs-item-vs-accumulator variable mix-up during first build exercise; resolved cleanly afterward. Two supplementary practice problems requested and completed correctly (including self-correcting a wrong console.log output description mid-exercise)."}
+      - {n: 4, name: "break and continue", status: complete, note: "One build exercise needed two rounds of correction: wrong comparison target/variable, then condition-before-addition ordering. Final version correct. Debugging exercises (break vs continue mixed up in both directions) both solved correctly, including precise fault naming."}
+    final_exercises:
+      total: 5
+      completed: 5
+      note: "All five completed. Exercise 1 had two missing semicolons (non-breaking, flagged). Exercises 3 and 5 required one round of correction each before the fault was named precisely; final answers correct."
+    scenario:
+      price: {value: 4, meaning: "the cost of one widget"}
+      widgetsPerDay: {value: 6, meaning: "how many widgets are sold each day, fixed"}
+      daysOpen: {value: 5, meaning: "how many days the shop is open this week"}
+    goal: "Print revenue for each of 5 days and a running weekly total. widgetsPerDay * price = 24/day; 5 days = 120 total."
+
+  topic_4_conditionals:
+    scenario:
+      widgets: {value: 6, meaning: "how many widgets are being bought"}
+      price:   {value: 4, meaning: "the cost of one widget"}
+      fee:     {value: 2, meaning: "a flat delivery charge, once per order"}
+      subtotal: {derived_from: "widgets * price", value: 24}
+      policy:
+        - "When subtotal is 40 or more, the total is subtotal - 5"
+        - "When subtotal is 20 or more but under 40, the total is subtotal alone"
+        - "Otherwise, the total is subtotal + fee"
+      switch_scenario:
+        speed: {values: ["standard", "express", "overnight"], meaning: "shipping speed chosen"}
+        policy:
+          - 'standard costs 0'
+          - 'express costs 5'
+          - 'overnight costs 10'
+          - "anything else is not a valid speed"
+
+recurring_patterns_flagged:
+  - "Stops after the trace on debugging exercises without naming the fault (largely resolved as of lesson 4)"
+  - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. Aurora had flagged wanting to revisit/solidify this separately at an undecided future point (see topic 5 Concept 1 note) — later performance suggests it may now be resolved, but the explicit revisit request stands until Aurora confirms."
+  - "Confuses break and continue in loop-control debugging exercises — occurred in both directions during Concept 4 of lesson 5 (break used where continue needed, and vice versa in a build exercise). Both correctly diagnosed and fixed with precise fault naming by end of concept."
+  - "Names a cause without testing whether the fix produces the required output (2 occurrences, lesson 3)"
+  - "Treats a stored variable as a live formula that updates when inputs change (5 occurrences, lesson 2; resolved by end of lesson 2)"
+  - "Digit used instead of an already-declared name holding the same value (multiple occurrences across lessons 1-4)"
+  - "Output labels drift from the exact required spec while logic is correct (5 occurrences, lessons 1-3)"
+  - "Mixes up which variable holds the whole collection vs. the current item vs. the running accumulator in for...of loops (1 occurrence, lesson 5 Concept 3 Exercise 1; resolved on second attempt same exercise)"
+
+next_action: "Say 'topic 6' to begin Functions."
