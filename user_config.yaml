@@ -1,12 +1,12 @@
-# Lesson Configuration
+# User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The template (lesson-plan-prompt-template-v17.1.0.md) holds the fixed rules.
-# Update this file each lesson; the template should rarely change.
+# The main config (main_config-v19.0.0.md) holds the fixed rules.
+# Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "17.1.0"
+  template_version: "19.0.0"
 
 learning_map:
   tiers:

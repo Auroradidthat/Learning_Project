@@ -156,8 +156,8 @@ edits mid-lesson.
   a rule does.
 - No: write nothing, and say clearly that nothing was saved.
 
-v17.1.0 (current)
-------------------
+v17.1.0
+-------
 Clarified v16.0.0 and v17.0.0's save/detect language: all
 learner-facing messages now speak in plain terms ("saved progress,"
 "save your progress so far") rather than naming lesson-config.yaml
@@ -165,8 +165,25 @@ directly, since the file format is an implementation detail a
 learner shouldn't need to know. The file itself, its structure, and
 when it's written are unchanged — wording only.
 
+v18.0.0
+-------
+Added: version every rule change, whenever it happens — not only
+during an end-of-lesson save. Formalizes the major/minor scheme
+already used throughout this changelog (major = a rule's substance
+changes; minor = wording/clarification only, no behavior change).
+Every change is saved immediately and logged, rather than queued for
+the next save-progress prompt.
+
+v19.0.0 (current)
+------------------
+Added: renamed the two saved files going forward. The rules template
+now saves as main_config-v{version}.md (was
+lesson-plan-prompt-template-v{version}.md); the per-learner state
+file now saves as user_config.yaml (was lesson-config.yaml). All
+future saves in this session and any new session use the new names.
+
 ============================================
-Total: 11 original rules + 17 substantive amendments + 2 wording
+Total: 11 original rules + 19 substantive amendments + 2 wording
 clarifications (portability, plain-language phrasing), made across
 this session.
-Current file: lesson-plan-prompt-template-v17.1.0.md
+Current file: main_config-v19.0.0.md
