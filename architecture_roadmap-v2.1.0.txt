@@ -1,0 +1,260 @@
+ARCHITECTURE ROADMAP
+Aurora's Lesson System - Web Application
+Version 2.1.0
+=========================================
+
+WHAT THIS DOCUMENT IS
+-----------------------
+A plan for taking the lesson system built in Claude - main_config.md
+(the rules) and user_config.yaml (progress state) - and turning it
+into a real web application using HTML, CSS, JavaScript, PHP, and
+MySQL, with the Claude API as the engine behind lesson generation
+and feedback.
+
+It serves two purposes, not one. First, it's a technical architecture
+plan - the layers, the schema, the build steps. Second, and just as
+important, it's a knowledge tracker - a way to see, at any point,
+what's already known and what still needs to be learned before a
+given piece of the app can actually be built. The readiness table
+further down is where that second purpose lives concretely: it maps
+each build step back to the lesson topics it depends on, so this
+document can answer "am I ready for this yet?" as directly as it
+answers "how does this get built?"
+
+This is a living document. Expect revisions as the build progresses
+and as more is learned; version it the same way main_config is
+versioned - major for structural changes, minor for wording or
+clarification.
+
+
+LAYER 1: DATABASE (MySQL)
+---------------------------
+Foundation tier. Two main tables, directly mirroring the two files
+that already exist:
+
+  lesson_rules
+    One row per version of the rules, same shape as main_config.md
+    plus its changelog. Only one version marked active at a time.
+
+    CREATE TABLE lesson_rules (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      version VARCHAR(20) NOT NULL,
+      rules_text LONGTEXT NOT NULL,
+      change_summary TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      is_active BOOLEAN DEFAULT FALSE
+    );
+
+  user_progress
+    One row per user, same shape as user_config.yaml, normalized
+    into columns and JSON fields.
+
+    CREATE TABLE user_progress (
+      user_id INT PRIMARY KEY,
+      course_name VARCHAR(100),
+      current_topic_n INT,
+      current_topic_name VARCHAR(100),
+      current_concept_n INT,
+      scenario_json JSON,
+      learning_map_json JSON,
+      recurring_patterns_json JSON,
+      next_action TEXT,
+      updated_at TIMESTAMP
+    );
+
+Why split rules from progress: rules rarely change and are versioned;
+progress updates every lesson. Separating them lets rules roll back
+independently and keeps every user seeing a consistent rule set.
+
+
+LAYER 2: BACKEND (PHP)
+-------------------------
+Business logic tier. Three responsibilities:
+
+  1. API Gateway to Claude
+     Takes a lesson request, loads the active rules and the user's
+     current state, formats them into a system prompt, calls Claude,
+     returns the response. The "read full config, confirm one line"
+     rule lives here, enforced server-side before any Claude call.
+
+  2. State Management
+     Handles the end-of-lesson save prompt and the session-start
+     detection prompt. Reads and writes user_progress on save;
+     reads and writes lesson_rules on a rule change.
+
+  3. Authentication & Session
+     Login, signup, session tokens, ensuring each user only sees
+     their own progress.
+
+
+LAYER 3: FRONTEND (HTML / CSS / JavaScript)
+----------------------------------------------
+Presentation tier.
+
+  HTML   - page structure: lesson interface, save prompt, the
+           one-line state confirmation shown at session start
+  CSS    - styling for lesson content, exercises, feedback
+  JS     - interactivity: submitting exercise answers, triggering
+           the save prompt, rendering Claude's responses, managing
+           predict-before-reveal behavior
+
+JavaScript sends user answers to PHP and renders what comes back.
+
+
+LAYER 4: CLAUDE API INTEGRATION (within PHP)
+------------------------------------------------
+The call point. PHP sends Claude API requests built from:
+
+  - the active lesson_rules text, as the system prompt
+  - the current user_progress state, appended to that system prompt
+  - the user's message (an answer, or a request for the next concept)
+
+Claude responds with lesson content or feedback; PHP formats and
+returns it to the frontend. Each call is effectively stateless -
+PHP supplies the full state every time, the same way pasting both
+files into a fresh chat does today.
+
+
+BUILD SEQUENCE
+-----------------
+Sequenced against the real files already produced in this project,
+not against hypothetical test data.
+
+  Step 1: Database schema, seeded from the existing files
+  -----------------------------------------------------------
+  Write a one-time migration script that parses the current
+  main_config-v20.0.0.md and user_config.yaml and inserts them
+  directly into lesson_rules and user_progress. The first row in
+  each table is real, already-tested content - not a placeholder.
+  This also validates the schema against real, slightly messy data
+  before any UI exists.
+
+  Step 2: PHP reads state and rules the same way the rule specifies
+  -----------------------------------------------------------------
+  Port the "read full config, confirm one line" rule directly into
+  a PHP function that loads user_progress and lesson_rules and
+  builds the same one-line confirmation string used in this chat -
+  same format, same fields (topic, concept, scenario, watches).
+
+  Step 3: Claude API call embeds the rules as the system prompt
+  -------------------------------------------------------------
+  The full lesson_rules text becomes the system prompt, verbatim,
+  with the user's current state appended as context. The rules
+  aren't rewritten for the web - they're reused exactly as they
+  exist now.
+
+  Step 4: Frontend renders the save/detect prompts already tested
+  -----------------------------------------------------------------
+  The exact prompt language already tested in this session -
+  "I don't see any saved progress for you yet. Would you like me to
+  start saving it?" and "Save your progress so far?" - becomes UI
+  text directly. This is implementation of already-validated UX,
+  not new design.
+
+  Step 5: Versioning becomes a database operation
+  -------------------------------------------------
+  Every rule change mid-session deactivates the current lesson_rules
+  row and inserts a new one with an incremented version, following
+  the same major/minor scheme already in use. Same logic, executed
+  in SQL instead of file saves.
+
+
+READINESS TABLE - what each build step depends on
+-------------------------------------------------------
+Use this to check readiness before attempting a step: find the step,
+check what it depends on, check whether that's already covered.
+This is a readiness gauge, not a hard gate - nothing stops you from
+attempting a step early if you'd rather learn by hitting the wall.
+
+JavaScript topics are tracked against the 18-topic learning map in
+user_progress / user_config.yaml. PHP and MySQL have no tracked
+curriculum yet - those cells are marked accordingly, and are
+honest gaps, not oversights.
+
+  Step 1 - Migration script (parse main_config.md and
+  user_config.yaml, insert into MySQL)
+    Depends on: basic file reading, string handling
+    JS status:  covered by topics already completed (1-5)
+    PHP status: no tracked curriculum yet - file I/O and MySQL
+                connection syntax needed, self-taught or added later
+    MySQL status: no tracked curriculum yet - basic INSERT/CREATE
+                  TABLE needed
+
+  Step 1 - scenario_json, learning_map_json,
+  recurring_patterns_json fields
+    Depends on: Arrays (topic 8), Objects (topic 9)
+    JS status:  not yet reached
+    PHP status: no tracked curriculum yet - PHP associative arrays
+                and json_encode/json_decode needed
+
+  Step 2 - PHP function to build the one-line state confirmation
+    Depends on: template literals / string building (topic 7),
+                Destructuring (topic 11)
+    JS status:  not yet reached
+    PHP status: no tracked curriculum yet - PHP string interpolation
+                and array access needed
+
+  Step 3 - Claude API call, system prompt built from rules + state
+    Depends on: Objects (topic 9), JSON handling (topic 18 covers
+                fetch/JSON on the JS side; the concept transfers)
+    JS status:  not yet reached
+    PHP status: no tracked curriculum yet - cURL or an HTTP client
+                library needed to call the Claude API from PHP
+
+  Step 4 - Frontend save/detect prompts
+    Depends on: DOM & events (topic 16), Fetch & JSON APIs (topic 18)
+    JS status:  not yet reached
+    PHP status: n/a - this step is JS/HTML/CSS only
+
+  Step 5 - Versioning as a database write
+    Depends on: Functions (topic 6), Error handling (topic 15)
+    JS status:  Functions is the next topic; Error handling not
+                yet reached
+    PHP status: no tracked curriculum yet - PHP functions and
+                try/catch needed (concepts transfer directly from
+                the JS course once reached)
+
+
+KEY DESIGN DECISIONS
+------------------------
+  Rules live in the database, not in a pasted file.
+    All users see the current active version; old versions stay
+    queryable for rollback, same as the changelog does today.
+
+  State serialization maps directly, not abstractly.
+    user_config.yaml's structure becomes user_progress's schema
+    field-for-field. No redesign needed, just normalization.
+
+  Claude API as a stateless function.
+    PHP always supplies full context (rules + state) on every call.
+    No reliance on Claude retaining anything between requests unless
+    a separate conversation-history feature is deliberately added
+    later.
+
+
+TECHNOLOGY STACK SUMMARY
+----------------------------
+  Layer      Tech            Role
+  ---------  --------------  --------------------------------------
+  Database   MySQL           Persistent state, versioned rules
+  Backend    PHP             Claude API calls, state management, auth
+  Frontend   HTML/CSS/JS     Interface, interactivity, rendering
+  External   Claude API      Lesson generation, feedback, teaching
+
+
+VERSIONING OF THIS DOCUMENT
+--------------------------------
+  Major (1.0.0 -> 2.0.0): a layer, table, or build step is added,
+    removed, or restructured.
+  Minor (1.0.0 -> 1.1.0): wording, clarification, or example changes
+    with no structural change.
+
+  Version 1.0.0 - initial roadmap, written before any code exists.
+  Version 2.0.0 - added the readiness table, mapping each build step
+    to the JS topics (and, where untracked, the PHP/MySQL knowledge)
+    it depends on. Lets the roadmap be read in reverse: start from a
+    build step, find out what's needed before attempting it, rather
+    than only reading forward from the JS curriculum.
+  Version 2.1.0 - clarified the document's stated purpose: it's a
+    knowledge tracker as much as a technical plan, not just the
+    latter. No structural change - wording only.
