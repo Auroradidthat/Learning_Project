@@ -1,12 +1,12 @@
 # User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The main config (main_config-v19.0.0.md) holds the fixed rules.
+# The main config (main_config-v20.0.0.md) holds the fixed rules.
 # Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "19.0.0"
+  template_version: "20.0.0"
 
 learning_map:
   tiers:

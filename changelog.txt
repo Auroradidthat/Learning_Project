@@ -174,16 +174,26 @@ changes; minor = wording/clarification only, no behavior change).
 Every change is saved immediately and logged, rather than queued for
 the next save-progress prompt.
 
-v19.0.0 (current)
-------------------
+v19.0.0
+-------
 Added: renamed the two saved files going forward. The rules template
 now saves as main_config-v{version}.md (was
 lesson-plan-prompt-template-v{version}.md); the per-learner state
 file now saves as user_config.yaml (was lesson-config.yaml). All
 future saves in this session and any new session use the new names.
 
+v20.0.0 (current)
+------------------
+Added: before building any lesson or concept, read the full
+user_config.yaml and confirm the current state back in one line
+(lesson/concept, scenario values, recurring-pattern watches). This
+is a gate ensuring real state absorption rather than memory-work,
+not a formality. Once confirmed, proceed using that state per the
+template rules — don't re-derive from memory, don't ask to restate
+what's already in the file.
+
 ============================================
-Total: 11 original rules + 19 substantive amendments + 2 wording
+Total: 11 original rules + 20 substantive amendments + 2 wording
 clarifications (portability, plain-language phrasing), made across
 this session.
-Current file: main_config-v19.0.0.md
+Current file: main_config-v20.0.0.md
