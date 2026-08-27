@@ -182,8 +182,8 @@ lesson-plan-prompt-template-v{version}.md); the per-learner state
 file now saves as user_config.yaml (was lesson-config.yaml). All
 future saves in this session and any new session use the new names.
 
-v20.0.0 (current)
-------------------
+v20.0.0
+-------
 Added: before building any lesson or concept, read the full
 user_config.yaml and confirm the current state back in one line
 (lesson/concept, scenario values, recurring-pattern watches). This
@@ -192,8 +192,51 @@ not a formality. Once confirmed, proceed using that state per the
 template rules — don't re-derive from memory, don't ask to restate
 what's already in the file.
 
+v21.0.0
+-------
+Added: verify a debugging exercise is complete before posting it —
+scenario table, the "what the correct output should be" list checked
+against the scenario's correct values (not derived from the broken
+code), the requirements list, and the code — and never post an
+incomplete debugging exercise and patch in the missing part in a
+later message once troubleshooting has already started from what
+was given. Prompted by a Lesson 6 debugging exercise posted without
+the correct-output list, which was then corrected mid-troubleshooting
+after the learner had already begun working from incomplete
+information.
+
+v22.0.0
+-------
+Changed Rule 7: each concept now gets four exercises, ordered easy →
+hard, mixing Build and Debugging (at least one of each type), rather
+than the previous fixed pair of exactly one Build + one Debugging.
+Progress-indicator format updated to match (`Exercise 1 of 4`
+instead of `Exercise 1 of 2`).
+
+v23.0.0
+-------
+Added: on multi-part checklists, if the reasoning in one answered
+part already logically states or implies content required by
+another part, credit it as answered there too rather than flagging
+that other part as missing. Only ask for a restatement if the
+required content genuinely isn't present anywhere in the answer.
+Prompted by a Lesson 6 debugging exercise where the learner's fault
+explanation (part 2) already implied the missing trace value (part
+1), but it was flagged as absent from the trace anyway.
+
+v24.0.0 (current)
+------------------
+Added clarification to Rule 8: the five final exercises may draw on
+concepts from previous lessons, not just this lesson's own — this is
+the designated spot for deliberate cross-lesson integration (e.g., a
+function wrapping a conditional from an earlier topic). Per-concept
+exercises (Rule 7) stay focused on the current lesson's own concepts
+as they're introduced, since stacking a brand-new concept with a
+much older one while still learning the new one works against the
+chunking principle the template is built around.
+
 ============================================
-Total: 11 original rules + 20 substantive amendments + 2 wording
+Total: 11 original rules + 24 substantive amendments + 2 wording
 clarifications (portability, plain-language phrasing), made across
 this session.
-Current file: main_config-v20.0.0.md
+Current file: main_config-v24.0.0.md

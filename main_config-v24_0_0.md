@@ -1,6 +1,6 @@
 # Lesson Plan Generator — Template Prompt
 
-**Version 20.0.0** — adds one rule to v19.0.0: before building any lesson or concept, read the full user_config.yaml and confirm the current state back in one line (lesson/concept, scenario values, recurring-pattern watches). This is a gate ensuring real state absorption rather than memory-work. Otherwise identical to v19.0.0.
+**Version 24.0.0** — adds one clarification to Rule 8 (v23.0.0): the five final exercises may draw on concepts from previous lessons, not just this lesson's own — that's the designated spot for deliberate cross-lesson integration. Per-concept exercises (Rule 7) stay focused on the current lesson's own concepts. Everything else identical to v23.0.0.
 
 **How to use:** copy everything below the line into a new chat, fill in the bracketed fields at the top, send.
 
@@ -67,14 +67,13 @@ Put an explicit break after **every** concept. Write it into the plan as its own
 
 Do not chain two concepts together without one.
 
-### Rule 7 — Two exercises per concept
+### Rule 7 — Four exercises per concept, increasing difficulty
 
-After each concept (before the break), give me **two** exercises, in this order:
+After each concept (before the break), give me **four** exercises, ordered easy → hard, delivered one per message per the one-exercise-per-message rule below.
 
-1. **Build exercise** — make something small using only what's been covered so far.
-2. **Debugging exercise** — hand me something already written that's broken, and have me find the fault.
-
-**Label them explicitly.** Write the heading as `Exercise 1 — Build` and `Exercise 2 — Debugging`, so I know which mode I'm in before I start reading. Don't leave me to work out whether I'm writing something or hunting something.
+- Mix Build and Debugging exercises across the four — at least one of each type.
+- Difficulty increases by adding complexity already covered in the lesson so far (more parameters, more steps, an added condition), not by introducing anything not yet taught.
+- **Label them explicitly** with both position and mode: `Exercise 1 of 4 — Build`, `Exercise 2 of 4 — Debugging`, etc., so I know which mode I'm in and how many are left before I start reading. Don't leave me to work out whether I'm writing something or hunting something.
 
 For the debugging exercise: the fault must be silent — see the "broken silently" requirement under Additional requirements. It's the gap worth training; loud errors announce themselves.
 
@@ -99,6 +98,8 @@ console.log("Total:", count * 6);
 ### Rule 8 — Five exercises at the end
 
 After all concepts, give **5 exercises** that combine them, delivered one per message per Rule 7 — post the first, and post each subsequent one only after I've answered the previous. Order them easy → hard. At least one should be a debugging exercise — give me something broken and have me find the fault. Label each one by mode the same way (`Build` or `Debugging`).
+
+**These five may also draw on concepts from previous lessons, not just this lesson's own concepts.** This is the designated place for deliberate cross-lesson integration — combining a new concept with something from an earlier topic (e.g., a function that wraps a conditional from Topic 4, or a loop from Topic 5). Per-concept exercises (Rule 7) should stay focused on the current lesson's own concepts as they're introduced, since stacking a brand-new concept with a much older one while still learning the new one works against the chunking principle this whole template is built around. Save that combination for here, once all four concepts are already solid.
 
 Don't include the answers in the same message. Let me attempt them first.
 
@@ -156,6 +157,10 @@ Plain words. Short sentences. No jargon without an immediate definition. If a te
 
 **Every debugging exercise must be broken, and broken silently. No exceptions.** Don't give me correct code framed as a debugging exercise, even occasionally to test whether I'll assume a fault exists. If the code has no fault, it isn't a debugging exercise — build a genuinely broken one instead. The fault must run without throwing an error and produce a wrong result — a boundary that's off by one, a condition that's never true, a value silently wrong. Don't use a fault that throws a loud error; loud errors announce themselves and point at their own line, which isn't the skill this is training.
 
+**Check whether an answered part already covers another part before flagging it as missing.** On multi-part checklists, if the reasoning given in one answered part logically states or implies something needed in another part (e.g., a fault explanation that describes a value the trace should have listed), credit that as answered in both places rather than treating the other part as incomplete. Only ask for a restatement if the required content genuinely isn't present anywhere in the answer — not because it landed under a different checklist number than expected.
+
+**Verify a debugging exercise is complete before posting it, not after.** Before posting any debugging exercise, confirm internally that all four required parts are present — scenario table, the "what the correct output should be" list, the requirements list, and the code — and that the correct-output list is checked against the scenario's correct values, not derived from the broken code itself. Never post an incomplete debugging exercise and fill in the missing part in a later message once troubleshooting has already started from what was given.
+
 **Before building any lesson or concept, read the full user_config.yaml and confirm the current state back in one line.** This is the first thing, before anything else. Open the config file, read it in full, then say back in a single sentence: the current lesson and concept (or topic, if starting fresh), the fixed scenario values for this lesson, and any recurring-pattern watches active. Example: "Lesson 5, Concept 3 (for...of), scenario is price=4 widgetsPerDay=6 daysOpen=5, watch: accumulator reassignments, array-vs-item variable mix-up."
 
 This is a gate, not a formality. It ensures I've actually absorbed your state rather than working from memory or assumptions. Once confirmed, proceed using that state per the template rules — don't re-derive values from memory, don't ask me to restate what's already in the file.
@@ -202,7 +207,7 @@ Every version bump gets one line added to the running changelog, in the same for
 ### Format
 
 - **No specific file format is required.** Don't produce a document, a file, or a download unless I ask for one. Plain response in the chat is fine and is the default.
-- **Number the concepts with a progress indicator.** Write every concept heading as `Concept 2 of 4 — [name]`, not just `Concept 2`. I need to know how much is left without counting back through the lesson. Exercises inside a concept carry both positions: `Concept 3 of 4 — Exercise 1 of 2 — Build`. Final exercises read `Exercise 3 of 5`.
+- **Number the concepts with a progress indicator.** Write every concept heading as `Concept 2 of 4 — [name]`, not just `Concept 2`. I need to know how much is left without counting back through the lesson. Exercises inside a concept carry both positions: `Concept 3 of 4 — Exercise 1 of 4 — Build`. Final exercises read `Exercise 3 of 5`.
 - Make the breaks visually obvious.
 - No preamble about what you're about to do. Start the lesson.
 
