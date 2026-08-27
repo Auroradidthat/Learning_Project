@@ -1,6 +1,9 @@
 AURORA'S LESSON SYSTEM - README
 =================================
 
+CURRENT VERSION: main_config-v24.0.0.md
+(check changelog.txt for what changed and when)
+
 WHAT THIS IS
 ------------
 A self-directed lesson system, built for one-on-one learning with an
@@ -105,7 +108,7 @@ rather than trying to diff the rules file by hand.
 
 FILE NAMING
 ------------
-  Rules:     main_config-v{version}.md   (e.g. main_config-v19.0.0.md)
+  Rules:     main_config-v{version}.md   (e.g. main_config-v24.0.0.md)
   Progress:  user_config.yaml            (no version number - always
                                           the latest, overwritten
                                           each save)
