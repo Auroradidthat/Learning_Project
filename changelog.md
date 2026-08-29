@@ -1,17 +1,14 @@
-CHANGELOG — lesson-plan-prompt-template.md
+# Changelog — main_config
 Aurora's JavaScript Fundamentals course
-============================================
 
-v1.0.0 (baseline)
------------------
+## v1.0.0 (baseline)
 Original uploaded template. 11 numbered rules (chunking, elaboration,
 repetition, frequent examples, predict-before-running, breaks, two
 exercises per concept, five final exercises, feedback, never instruct
 without explaining why, simple language) plus "Additional requirements"
 and "Format" sections.
 
-v2.0.0 (informal — not saved as a separate file)
--------------------------------------------------
+## v2.0.0 (informal — not saved as a separate file)
 Seven amendments made in response to feedback after Lesson 1:
 - One exercise per message; corrections never share a message with
   the original.
@@ -24,37 +21,31 @@ Seven amendments made in response to feedback after Lesson 1:
 - Don't comment on delivery method (code fence labels, formatting).
 - Don't correct capitalisation/formatting in prose prediction answers.
 
-v3.0.0
-------
+## v3.0.0
 First versioned file. Added: bulleted requirements — every exercise
 requirement listed as its own bullet, never combined into one sentence.
 
-v4.0.0
-------
+## v4.0.0
 Added: progress indicators on concept headings ("Concept 2 of 4") and
 final exercise headings ("Exercise 3 of 5").
 
-v5.0.0
-------
+## v5.0.0
 Added: four-part exercise structure — Scenario table (variable, value,
 meaning), Required output, Requirements, code (if debugging). Scenario
 must be a table, never shorthand prose like "6 widgets at 4 each."
 
-v6.0.0
-------
+## v6.0.0
 Added: reference table required at the end of every concept, before
 exercises, for any set of operators/keywords/methods introduced —
 symbol, plain-English meaning, worked result using the lesson's
 scenario values.
 
-v7.0.0
-------
+## v7.0.0
 Added: any rule, policy, or business condition must be stated as a
 bulleted list, never packed into a prose sentence — split into "the
 rules" and "what they evaluate to for this scenario" as two lists.
 
-v8.0.0
-------
+## v8.0.0
 Resolved three internal contradictions discovered on request:
 - Rule 7 ("let me hunt," no fault count) conflicted with the
   checklist format on multi-fault exercises — checklist item reworded
@@ -64,20 +55,17 @@ Resolved three internal contradictions discovered on request:
 - Rule 3's "restate all four" assumed exactly four concepts, contra
   Rule 1's stated maximum — reworded to "every concept covered."
 
-v8.1.0
-------
+## v8.1.0
 Clarified the v8.0.0 multi-fault rule: every debugging answer now gets
 an explicit verdict — "All faults found" or "The hunt isn't over" —
 so completion is always stated even though the count stays hidden.
 
-v9.0.0
-------
+## v9.0.0
 Added: every debugging exercise must contain a genuine fault, no
 exceptions — including no unannounced "actually this code is correct"
 tests of verification habits.
 
-v10.0.0
--------
+## v10.0.0
 Resolved two further internal conflicts:
 - "Must be broken" didn't specify broken *how* — merged with Rule 7's
   separate silent-fault preference into one rule: faults must run
@@ -88,48 +76,41 @@ Resolved two further internal conflicts:
   split into "Required output" (Build) vs. "What the correct output
   should be" (Debugging), preserving Rule 5's no-early-reveal.
 
-v11.0.0
--------
+## v11.0.0
 Clarified "externalize invisible state" (from v1.0.0): end-of-block
 comments (`// end if`, `// end for`) stay automatic in every worked
 example and in code written by the assistant, but are no longer a
 checkable requirement on exercise specs, and an otherwise-correct
 answer isn't marked down for omitting one.
 
-v12.0.0
--------
+## v12.0.0
 Added: ask before advancing to the next concept once a concept's
 exercises are done, and wait for explicit confirmation rather than
 continuing automatically.
 
-v13.0.0
--------
+## v13.0.0
 Added: when asked to retry a problem, keep the same format/structure
 but change the values, so it isn't a re-answer of what was already
 seen.
 
-v14.0.0
--------
+## v14.0.0
 Added: never answer an unaddressed part of a multi-part question,
 even while correcting the part that was answered — state what's
 still open and stop, rather than revealing the rest.
 
-v15.0.0
--------
+## v15.0.0
 Added: verify traces, faults, and fixes fully before stating them as
 settled, rather than presenting a claim with confidence and then
 asking the learner to check it against their own output.
 
-v15.1.0
--------
+## v15.1.0
 Clarified two rules (v6.0.0's rules-as-lists requirement and v5.0.0's
 four-part exercise structure): replaced course-specific illustrative
 examples (the widgets/price scenario) with topic-neutral ones, so the
 template stays portable across subjects rather than implicitly tied
 to this JavaScript course. No rule content changed — wording only.
 
-v16.0.0
--------
+## v16.0.0
 Added: check for a lesson-config.yaml at the start of every session,
 before doing anything else.
 - If present, read it and resume from its state (course, learning
@@ -142,8 +123,7 @@ before doing anything else.
 - Never invent config values or assume returning-learner context
   without reading a real file or explicitly asking.
 
-v17.0.0
--------
+## v17.0.0
 Added: ask whether to save progress at the end of every lesson, once
 all concepts and final exercises are done — a single end-of-lesson
 checkpoint, distinct from the standing rule against proposing YAML
@@ -156,8 +136,7 @@ edits mid-lesson.
   a rule does.
 - No: write nothing, and say clearly that nothing was saved.
 
-v17.1.0
--------
+## v17.1.0
 Clarified v16.0.0 and v17.0.0's save/detect language: all
 learner-facing messages now speak in plain terms ("saved progress,"
 "save your progress so far") rather than naming lesson-config.yaml
@@ -165,8 +144,7 @@ directly, since the file format is an implementation detail a
 learner shouldn't need to know. The file itself, its structure, and
 when it's written are unchanged — wording only.
 
-v18.0.0
--------
+## v18.0.0
 Added: version every rule change, whenever it happens — not only
 during an end-of-lesson save. Formalizes the major/minor scheme
 already used throughout this changelog (major = a rule's substance
@@ -174,16 +152,14 @@ changes; minor = wording/clarification only, no behavior change).
 Every change is saved immediately and logged, rather than queued for
 the next save-progress prompt.
 
-v19.0.0
--------
+## v19.0.0
 Added: renamed the two saved files going forward. The rules template
 now saves as main_config-v{version}.md (was
 lesson-plan-prompt-template-v{version}.md); the per-learner state
 file now saves as user_config.yaml (was lesson-config.yaml). All
 future saves in this session and any new session use the new names.
 
-v20.0.0
--------
+## v20.0.0
 Added: before building any lesson or concept, read the full
 user_config.yaml and confirm the current state back in one line
 (lesson/concept, scenario values, recurring-pattern watches). This
@@ -192,8 +168,7 @@ not a formality. Once confirmed, proceed using that state per the
 template rules — don't re-derive from memory, don't ask to restate
 what's already in the file.
 
-v21.0.0
--------
+## v21.0.0
 Added: verify a debugging exercise is complete before posting it —
 scenario table, the "what the correct output should be" list checked
 against the scenario's correct values (not derived from the broken
@@ -205,16 +180,14 @@ the correct-output list, which was then corrected mid-troubleshooting
 after the learner had already begun working from incomplete
 information.
 
-v22.0.0
--------
+## v22.0.0
 Changed Rule 7: each concept now gets four exercises, ordered easy →
 hard, mixing Build and Debugging (at least one of each type), rather
 than the previous fixed pair of exactly one Build + one Debugging.
 Progress-indicator format updated to match (`Exercise 1 of 4`
 instead of `Exercise 1 of 2`).
 
-v23.0.0
--------
+## v23.0.0
 Added: on multi-part checklists, if the reasoning in one answered
 part already logically states or implies content required by
 another part, credit it as answered there too rather than flagging
@@ -224,8 +197,7 @@ Prompted by a Lesson 6 debugging exercise where the learner's fault
 explanation (part 2) already implied the missing trace value (part
 1), but it was flagged as absent from the trace anyway.
 
-v24.0.0 (current)
-------------------
+## v24.0.0
 Added clarification to Rule 8: the five final exercises may draw on
 concepts from previous lessons, not just this lesson's own — this is
 the designated spot for deliberate cross-lesson integration (e.g., a
@@ -235,8 +207,59 @@ as they're introduced, since stacking a brand-new concept with a
 much older one while still learning the new one works against the
 chunking principle the template is built around.
 
-============================================
-Total: 11 original rules + 24 substantive amendments + 2 wording
+## v25.0.0
+Added: verify every coding exercise (Build or Debugging) against all
+applicable rules before posting it — solvable using only concepts
+covered so far, a Build exercise's required output actually
+achievable, a Debugging exercise containing a genuine verified fault
+and otherwise complete — rather than posting first and correcting
+after the learner has already started working from it. Prompted by
+a Lesson 6 debugging exercise posted with no actual fault, which
+already violated an existing rule (v9.0.0) that nothing required
+checking against before posting.
+
+## v26.0.0
+Added clause to Rule 9: explanations must be terse without losing
+context — cut filler, restating the obvious, and padding, but keep
+all reasoning that makes feedback (what worked / what didn't /
+rule of thumb) useful. Requested directly by the learner.
+
+## v27.0.0
+Changed file naming: the changelog now saves as `changelog.md`
+(was `changelog.txt`), converted to Markdown with `##` headings per
+entry. No rule content changed — this entry itself is the last one
+written to the old `.txt` format. Requested directly by the learner.
+
+## v28.0.0
+Added clause to Rule 9: verify silently before posting, not aloud
+during — checks (trace, calculation, running code) happen before
+drafting the reply, never reasoned through live in the message text
+or narrated as a mid-response correction. State results plainly.
+Confirm a response is fully processed and error-checked before
+posting; fix and re-verify if a problem surfaces, not after posting.
+Prompted by a Lesson 6 exercise where a miscalculation was caught
+and corrected live in the reply text instead of before it was sent.
+
+## v29.0.0
+Added: state which code elements are fixed vs. changeable in a
+debugging exercise, when the fault could plausibly be fixed in more
+than one place (e.g., a declaration vs. a call) — list off-limits
+parts (fixed scenario values, calls designed to test a specific
+default) before the code, so the fix targets the actual fault rather
+than an accidental workaround. Prompted by two Lesson 6 default-
+parameter exercises where the fix repeatedly landed on the call
+instead of the broken declaration.
+
+## v30.0.0 (current)
+Added to Rule 6: report strengths and gaps after every concept's
+four exercises, before the break — what was demonstrated solidly
+vs. what needed a hint, correction, or more than one attempt,
+specific to that concept rather than the whole lesson. Requested
+directly by the learner.
+
+---
+
+Total: 11 original rules + 30 substantive amendments + 2 wording
 clarifications (portability, plain-language phrasing), made across
 this session.
-Current file: main_config-v24.0.0.md
+Current file: main_config-v30.0.0.md

@@ -1,12 +1,12 @@
 # User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The main config (main_config-v20.0.0.md) holds the fixed rules.
+# The main config (main_config-v30.0.0.md) holds the fixed rules.
 # Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "24.0.0"
+  template_version: "30.0.0"
 
 learning_map:
   tiers:
@@ -17,7 +17,7 @@ learning_map:
         - {n: 3, name: "Operators & expressions", status: complete}
         - {n: 4, name: "Conditionals", status: complete}
         - {n: 5, name: "Loops", status: complete}
-        - {n: 6, name: "Functions", status: not_started}
+        - {n: 6, name: "Functions", status: complete}
     - name: "Data & functions"
       topics:
         - {n: 7,  name: "Strings & templates", status: not_started}
@@ -36,11 +36,29 @@ learning_map:
         - {n: 18, name: "Fetch & JSON APIs", status: not_started}
 
 current_lesson:
-  topic_n: 6
-  topic_name: "Functions"
+  topic_n: 7
+  topic_name: "Strings & templates"
   status: not_started
 
 completed_lessons:
+  topic_6_functions:
+    concepts:
+      - {n: 1, name: "function declarations & calling", status: complete, note: "Build exercise correct first attempt. Debugging exercise 1 was delayed by a Claude process error (posted without the required correct-output list, then corrected mid-troubleshooting) — prompted v21.0.0. Once reissued properly, trace and fault both correct first attempt."}
+      - {n: 2, name: "parameters & arguments", status: complete, note: "Build exercise correct first attempt, including correct reliance on operator precedence (* before string concatenation). Debugging exercise: fault named correctly throughout; a Claude near-miss on the trace was self-caught and corrected before posting."}
+      - {n: 3, name: "return values", status: complete, note: "4 exercises (new per-concept structure, v22.0.0). Ex1 correct first try. Ex2: fault reasoning already implied the missing trace value, but was flagged as missing anyway — prompted v23.0.0 (credit implied answers across checklist parts). Ex3 (build, combined with Topic 4 conditionals): needed guided assistance; initially wrote comparison backwards (<= instead of >=), corrected. Ex4 (debugging, boundary case): initial trace stated the *correct* output instead of tracing the broken code; corrected on second attempt, fault named precisely."}
+      - {n: 4, name: "default parameters", status: complete, note: "4 exercises. Ex1 correct first try. Ex2: Claude posted a debugging exercise with no actual fault (violated v9.0.0) — prompted v25.0.0 (verify exercises before posting); reissued exercise solved correctly. Ex3: proposed fixing the broken default by changing the call value three separate times (getTotal(6), getTotal(4,6), getTotal(4)) instead of the declaration, each preserving scenario meaning incorrectly; corrected only once told explicitly which parts were fixed vs. changeable — prompted v29.0.0. Ex4 (properly scoped per v29.0.0): solved correctly first attempt."}
+    final_exercises:
+      total: 5
+      completed: 5
+      note: "Ex1 (build) correct first try. Ex2 (build, functions + Topic 4 conditionals) needed substantial guided help: function called from inside itself, if/else branches assigned backwards (discount/no-discount swapped), a naming collision between an inner and outer variable both called `total`, and an initial call-argument mismatch — all resolved across multiple rounds. Ex3 (build, functions + Topic 5 loops) required a full guided rebuild of for-loop syntax from scratch (counter/condition/step forgotten entirely, unusual given lesson 5 mastery), plus two further faults (missing price declaration, missing spaces in required output string) — all resolved. Ex4 (debugging, loops) and Ex5 (debugging, conditionals/switch) both solved independently, no help needed."
+    scenario:
+      price: {value: 4, meaning: "the cost of one widget"}
+      quantity: {value: 6, meaning: "default number of widgets, used when no quantity is given (Concepts 1-2, 4)"}
+      discount_scenario: {price: 4, quantity: 6, discount: 2, rule: "discount of 2 applies when quantity is 5 or more (Concept 3, Final Ex2)"}
+      loop_scenario: {price: 4, daysOpen: 3, rule: "log Day N: price * N for each day (Final Ex3-4)"}
+      switch_scenario: {reused_from: "topic_4_conditionals.switch_scenario", note: "overnight shipping cost, Final Ex5"}
+    template_versions_during_lesson: "Started at v20.0.0, ended at v30.0.0 — 10 mid-lesson rule changes across this lesson alone (v21-v30). Full detail in changelog.md."
+
   topic_5_loops:
     concepts:
       - {n: 1, name: "for", status: complete, note: "Required extra explanation on the three-slot for(...) shape and the < vs <= boundary distinction before it landed. Ran a supplementary 3-exercise boundary drill outside the normal concept structure to solidify < vs <= as a loop-stopping condition — all three completed correctly."}
@@ -77,12 +95,16 @@ completed_lessons:
 
 recurring_patterns_flagged:
   - "Stops after the trace on debugging exercises without naming the fault (largely resolved as of lesson 4)"
-  - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. Aurora had flagged wanting to revisit/solidify this separately at an undecided future point (see topic 5 Concept 1 note) — later performance suggests it may now be resolved, but the explicit revisit request stands until Aurora confirms."
+  - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. No new occurrences in lesson 6. Aurora's explicit revisit request still stands until confirmed resolved."
   - "Confuses break and continue in loop-control debugging exercises — occurred in both directions during Concept 4 of lesson 5 (break used where continue needed, and vice versa in a build exercise). Both correctly diagnosed and fixed with precise fault naming by end of concept."
   - "Names a cause without testing whether the fix produces the required output (2 occurrences, lesson 3)"
   - "Treats a stored variable as a live formula that updates when inputs change (5 occurrences, lesson 2; resolved by end of lesson 2)"
   - "Digit used instead of an already-declared name holding the same value (multiple occurrences across lessons 1-4)"
   - "Output labels drift from the exact required spec while logic is correct (5 occurrences, lessons 1-3)"
   - "Mixes up which variable holds the whole collection vs. the current item vs. the running accumulator in for...of loops (1 occurrence, lesson 5 Concept 3 Exercise 1; resolved on second attempt same exercise)"
+  - "When a debugging fix could land in more than one place, fixes by changing the call/argument instead of the actual broken declaration — occurred 3 times in a row in lesson 6 Concept 4 Exercise 3 (default-parameter fixes), each attempt breaking what the call was meant to test even though the number came out right. Resolved once exercises explicitly stated which code elements were fixed vs. changeable (prompted v29.0.0); correct unaided on the next exercise."
+  - "For-loop syntax (counter/condition/step) forgotten entirely — one occurrence, lesson 6 final Exercise 3, despite full mastery shown in lesson 5. Needed a complete guided rebuild from scratch. Worth a quick unprompted refresher early in a future lesson if it recurs; not yet a confirmed pattern on one occurrence."
+  - "Assigns if/else branches to the wrong condition (discount/no-discount logic backwards relative to the stated policy) — one occurrence, lesson 6 final Exercise 2. Distinct from earlier lesson 4 conditional struggles (which were about output labels, not branch logic); corrected once the trace was walked through explicitly."
+  - "Variable naming collision between a function-internal variable and an outer variable of the same name (both called `total`), causing a real runtime error — one occurrence, lesson 6 final Exercise 2. Corrected on the first explanation."
 
-next_action: "Say 'topic 6' to begin Functions."
+next_action: "Say 'topic 7' to begin Strings & templates."
