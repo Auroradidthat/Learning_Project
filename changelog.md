@@ -250,16 +250,24 @@ than an accidental workaround. Prompted by two Lesson 6 default-
 parameter exercises where the fix repeatedly landed on the call
 instead of the broken declaration.
 
-## v30.0.0 (current)
+## v30.0.0
 Added to Rule 6: report strengths and gaps after every concept's
 four exercises, before the break — what was demonstrated solidly
 vs. what needed a hint, correction, or more than one attempt,
 specific to that concept rather than the whole lesson. Requested
 directly by the learner.
 
+## v31.0.0 (current)
+Added clause to Rule 8: when choosing which prior topic(s) final
+exercises draw on, prefer topics with an open recurring-pattern
+watch (per user_config.yaml) over whichever topic is simply most
+recent — targets active gaps deliberately rather than reinforcing
+whatever was just covered by default. Requested directly by the
+learner.
+
 ---
 
-Total: 11 original rules + 30 substantive amendments + 2 wording
+Total: 11 original rules + 31 substantive amendments + 2 wording
 clarifications (portability, plain-language phrasing), made across
 this session.
-Current file: main_config-v30.0.0.md
+Current file: main_config-v31.0.0.md

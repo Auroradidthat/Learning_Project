@@ -1,7 +1,7 @@
 AURORA'S LESSON SYSTEM - README
 =================================
 
-CURRENT VERSION: main_config-v30.0.0.md
+CURRENT VERSION: main_config-v31.0.0.md
 (check changelog.md for what changed and when)
 
 WHAT THIS IS
@@ -108,7 +108,7 @@ rather than trying to diff the rules file by hand.
 
 FILE NAMING
 ------------
-  Rules:     main_config-v{version}.md   (e.g. main_config-v30.0.0.md)
+  Rules:     main_config-v{version}.md   (e.g. main_config-v31.0.0.md)
   Progress:  user_config.yaml            (no version number - always
                                           the latest, overwritten
                                           each save)

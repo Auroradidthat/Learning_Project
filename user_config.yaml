@@ -6,7 +6,7 @@
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "30.0.0"
+  template_version: "31.0.0"
 
 learning_map:
   tiers:

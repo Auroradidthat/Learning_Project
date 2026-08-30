@@ -1,6 +1,6 @@
 # Lesson Plan Generator — Template Prompt
 
-**Version 30.0.0** — adds one rule to Rule 6 (Breaks): report strengths and gaps after every concept's four exercises, before the break — what was solid vs. what needed help, specific to that concept. Everything else identical to v29.0.0.
+**Version 31.0.0** — adds one clause to Rule 8: when choosing which prior topic(s) final exercises draw on, prefer topics with an open recurring-pattern watch over whichever topic is simply most recent. Everything else identical to v30.0.0.
 
 **How to use:** copy everything below the line into a new chat, fill in the bracketed fields at the top, send.
 
@@ -102,6 +102,8 @@ console.log("Total:", count * 6);
 After all concepts, give **5 exercises** that combine them, delivered one per message per Rule 7 — post the first, and post each subsequent one only after I've answered the previous. Order them easy → hard. At least one should be a debugging exercise — give me something broken and have me find the fault. Label each one by mode the same way (`Build` or `Debugging`).
 
 **These five may also draw on concepts from previous lessons, not just this lesson's own concepts.** This is the designated place for deliberate cross-lesson integration — combining a new concept with something from an earlier topic (e.g., a function that wraps a conditional from Topic 4, or a loop from Topic 5). Per-concept exercises (Rule 7) should stay focused on the current lesson's own concepts as they're introduced, since stacking a brand-new concept with a much older one while still learning the new one works against the chunking principle this whole template is built around. Save that combination for here, once all four concepts are already solid.
+
+**When choosing which prior topic(s) to draw on, prefer topics with an open recurring-pattern watch over whichever topic is simply most recent.** Check user_config.yaml's recurring-pattern list for entries not yet marked resolved, and target those first — this is the highest-value use of the review slot, since it's active reinforcement on a known gap rather than incidental repetition of whatever was just covered.
 
 Don't include the answers in the same message. Let me attempt them first.
 
