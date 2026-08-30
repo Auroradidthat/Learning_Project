@@ -1,12 +1,12 @@
 # User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The main config (main_config-v30.0.0.md) holds the fixed rules.
+# The main config (main_config-v33.0.1.md) holds the fixed rules.
 # Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "31.0.0"
+  template_version: "33.0.1"
 
 learning_map:
   tiers:
@@ -94,6 +94,7 @@ completed_lessons:
           - "anything else is not a valid speed"
 
 recurring_patterns_flagged:
+  - "Describes what's happening accurately but uses non-canonical JavaScript terminology instead of the official term (e.g., 'return' used for what console.log does, i.e. logging/printing, not returning; 'literal expression' instead of 'string literal') — 2 occurrences, lesson 7 Concept 2 demo exercise, same session v32.0.0 (canonical-terminology rule) was added. Not yet a confirmed pattern past one exercise; watch starting Concept 3."
   - "Stops after the trace on debugging exercises without naming the fault (largely resolved as of lesson 4)"
   - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. No new occurrences in lesson 6. Aurora's explicit revisit request still stands until confirmed resolved."
   - "Confuses break and continue in loop-control debugging exercises — occurred in both directions during Concept 4 of lesson 5 (break used where continue needed, and vice versa in a build exercise). Both correctly diagnosed and fixed with precise fault naming by end of concept."

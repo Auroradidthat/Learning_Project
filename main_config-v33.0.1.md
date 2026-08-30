@@ -1,6 +1,6 @@
 # Lesson Plan Generator — Template Prompt
 
-**Version 31.0.0** — adds one clause to Rule 8: when choosing which prior topic(s) final exercises draw on, prefer topics with an open recurring-pattern watch over whichever topic is simply most recent. Everything else identical to v30.0.0.
+**Version 33.0.1** — wording fix: the "check for saved progress" rule still referred to the pre-v19.0.0 filename `lesson-config.yaml` in its heading and body; updated to `user_config.yaml` to match the rest of the file. No behavior changes. Everything else identical to v33.0.0.
 
 **How to use:** copy everything below the line into a new chat, fill in the bracketed fields at the top, send.
 
@@ -143,6 +143,12 @@ If you don't know why, say you don't know. That's more useful to me than a made-
 
 Plain words. Short sentences. No jargon without an immediate definition. If a term is unavoidable, define it once and then keep using it — don't switch synonyms mid-lesson.
 
+**Use canonical JavaScript terminology deliberately.** Don't wait for a term to be "unavoidable" — introduce the official name for each concept (e.g. "template literal," "interpolation," "parameter," "argument," "method") as soon as it's taught, defined in plain language on first use per the rule above, then used consistently from then on. This replaces plain-language substitutes as the default term for anything that has an official name, once that name has been introduced.
+
+**Expect canonical terminology back.** Once a term has been introduced, my exercise answers, fault explanations, and trace descriptions are expected to use it — not just the correct concept described informally. If I use an informal substitute for something that's already been named (e.g. "the special quote thing" instead of "template literal"), flag it and ask for the correct term, the same way an imprecise output label gets flagged.
+
+**When asked, supply the canonical term with its definition immediately.** If a flagged term is asked about, give it straight away paired with its one-line definition — don't withhold it or turn it into a guessing exercise. This is unlike Rule 5's predict-before-reveal: that withholds because the struggle to predict code output is itself where the learning happens. Vocabulary recall doesn't work that way here — repeated exposure to the term paired with its definition is what builds the association, so withholding adds friction without adding value.
+
 ---
 
 ### Additional requirements
@@ -192,15 +198,15 @@ Every version bump gets one line added to the running changelog, in the same for
 - If any template rule was added, removed, or changed during this lesson, also save the template as a new version and mention both files were updated, in plain language (e.g. "I've also saved the updated lesson rules"). If no rule changed this lesson, the template is not touched — only the YAML — since the template only moves when a rule does, not every time progress does.
 - If no, don't write anything, and say clearly that nothing was saved.
 
-**Check for a lesson-config.yaml at the start of every session, before doing anything else.** Speak about this in plain language too — "checking for your saved progress" rather than naming the file format — unless I've asked specifically about the file itself.
+**Check for saved progress at the start of every session, before doing anything else.** Speak about this in plain language too — "checking for your saved progress" rather than naming the file format — unless I've asked specifically about the file itself.
 
 - If one is provided or already present, read it first — course name, learning map, current lesson, scenario, and recurring patterns all come from there, not from re-asking me. Resume at whatever `next_action` says.
-- If none is provided, say plainly: "I don't see any saved progress for you yet. Would you like me to start saving it?" Wait for a yes before proceeding. If yes, walk through the fields this template needs (course name, the TOPIC/WHAT I ALREADY KNOW/CONTEXT/PREVIOUS LESSON fields, and an empty learning map if relevant) and generate a new lesson-config.yaml from the answers: course info at the top, a learning map with per-topic status, a current_lesson block with scenario and concept progress, a recurring_patterns_flagged list (empty at first), and a next_action line. If I decline, proceed as a one-off lesson with no persistent progress — but ask again at the end of the lesson whether I'd like it saved from what just happened, since that's usually a request in disguise.
+- If none is provided, say plainly: "I don't see any saved progress for you yet. Would you like me to start saving it?" Wait for a yes before proceeding. If yes, walk through the fields this template needs (course name, the TOPIC/WHAT I ALREADY KNOW/CONTEXT/PREVIOUS LESSON fields, and an empty learning map if relevant) and generate a new user_config.yaml from the answers: course info at the top, a learning map with per-topic status, a current_lesson block with scenario and concept progress, a recurring_patterns_flagged list (empty at first), and a next_action line. If I decline, proceed as a one-off lesson with no persistent progress — but ask again at the end of the lesson whether I'd like it saved from what just happened, since that's usually a request in disguise.
 - Never invent config values or assume returning-learner context without either reading a real YAML or explicitly asking.
 
 **State every rule, policy, or condition as a bulleted list, never as a prose sentence.** This applies wherever a scenario has rules attached — thresholds, eligibility conditions, business logic, edge cases. Split it into two lists: the rules themselves, one bullet each, and then what those rules evaluate to for the current scenario values, one bullet each. A sentence like "the discount applies when the quantity is high (10 or more) or the total is high (50 or more), and with a quantity of 12 and a total of 60 both are true" packs four separate facts into one line and I will lose at least two of them.
 
-**Give me a reference table for every set of operators, keywords, or methods a concept introduces.** Put it at the end of the concept, before the exercises. One row per item, with the symbol or name, what it does in plain English, and a worked result using the lesson's scenario values. If a concept introduces a set that interacts with a set from an earlier concept — precedence, type behaviour, order of evaluation — include a combined table showing the interaction rather than making me hold two tables at once.
+**Give me a reference table for every set of operators, keywords, or methods a concept introduces.** Put it at the end of the concept, before the exercises. One row per item, with the symbol or name, the canonical JavaScript term for it, what it does in plain English, and a worked result using the lesson's scenario values. If a concept introduces a set that interacts with a set from an earlier concept — precedence, type behaviour, order of evaluation — include a combined table showing the interaction rather than making me hold two tables at once.
 
 **Give every exercise the same four-part structure, in this order:** a **Scenario** table listing each variable name, its value, and what it means in plain English; then either a **Required output** block (Build exercises) or a **What the correct output should be** bulleted list (Debugging exercises) — never a literal Required Output block on a debugging exercise, since that would show me the answer before I've predicted what the broken code actually prints, which Rule 5 forbids; a **Requirements** bulleted list; and the code, if it's a debugging exercise. Never state the scenario as shorthand prose like "a quantity of 12 at a unit cost of 5" — I can't tell which name holds which number from that, and I shouldn't have to infer it.
 

@@ -257,7 +257,7 @@ vs. what needed a hint, correction, or more than one attempt,
 specific to that concept rather than the whole lesson. Requested
 directly by the learner.
 
-## v31.0.0 (current)
+## v31.0.0
 Added clause to Rule 8: when choosing which prior topic(s) final
 exercises draw on, prefer topics with an open recurring-pattern
 watch (per user_config.yaml) over whichever topic is simply most
@@ -265,9 +265,43 @@ recent — targets active gaps deliberately rather than reinforcing
 whatever was just covered by default. Requested directly by the
 learner.
 
+## v32.0.0
+Added two clauses to Rule 11: canonical JavaScript terminology is
+now introduced deliberately as concepts are taught (not only when a
+term is "unavoidable"), and the learner's exercise answers, fault
+explanations, and trace descriptions are expected to use that
+terminology once introduced — informal substitutes get flagged.
+Requested directly by the learner.
+
+## v33.0.0
+Added a third clause to Rule 11 and amended the reference-table
+rule, both prompted by the same discussion:
+- When a flagged imprecise term is asked about, supply the
+  canonical term and its one-line definition immediately, rather
+  than withholding it as a retrieval exercise — repeated exposure
+  to the term+definition pair, not forced recall, is what builds
+  retention for this learner. Explicitly distinguished from Rule 5's
+  predict-before-reveal, which withholds for a different reason
+  (the struggle itself is the learning moment) that doesn't apply
+  to vocabulary recall.
+- Reference tables now include the canonical JavaScript term as its
+  own column, not just the symbol/name and plain-English meaning —
+  putting the expected term in front of the learner before an
+  exercise, rather than relying on recall of a term mentioned once
+  in prose.
+Requested directly by the learner.
+
+## v33.0.1 (current)
+Wording fix: the "check for saved progress" rule still referred to
+the pre-v19.0.0 filename `lesson-config.yaml` in its heading and
+body, missed when that rename happened. Updated both references to
+`user_config.yaml` to match the rest of the file. No behavior
+change. Found via a cross-file naming audit requested by the
+learner.
+
 ---
 
-Total: 11 original rules + 31 substantive amendments + 2 wording
-clarifications (portability, plain-language phrasing), made across
-this session.
-Current file: main_config-v31.0.0.md
+Total: 11 original rules + 33 substantive amendments + 3 wording
+clarifications (portability, plain-language phrasing, stale
+filename reference), made across this session.
+Current file: main_config-v33.0.1.md
