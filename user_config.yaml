@@ -1,12 +1,12 @@
 # User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The main config (main_config-v33.0.1.md) holds the fixed rules.
+# The main config (main_config-v36.0.0.md) holds the fixed rules.
 # Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "33.0.1"
+  template_version: "36.0.0"
 
 learning_map:
   tiers:
@@ -20,7 +20,7 @@ learning_map:
         - {n: 6, name: "Functions", status: complete}
     - name: "Data & functions"
       topics:
-        - {n: 7,  name: "Strings & templates", status: not_started}
+        - {n: 7,  name: "Strings & templates", status: complete}
         - {n: 8,  name: "Arrays & indexing", status: not_started}
         - {n: 9,  name: "Objects", status: not_started}
         - {n: 10, name: "Array methods", status: not_started}
@@ -36,11 +36,37 @@ learning_map:
         - {n: 18, name: "Fetch & JSON APIs", status: not_started}
 
 current_lesson:
-  topic_n: 7
-  topic_name: "Strings & templates"
+  topic_n: 8
+  topic_name: "Arrays & indexing"
   status: not_started
 
+cumulative_reference_sheet:
+  # Per Rule 12 (v36.0.0): one row per term added as introduced, course-wide,
+  # never edited or removed. Started empty at v36.0.0 — begins populating
+  # from Topic 8 forward. Terms already taught in Topics 1-7 can be
+  # backfilled on request but aren't auto-populated retroactively.
+  entries: []
+
 completed_lessons:
+  topic_7_strings_templates:
+    concepts:
+      - {n: 1, name: "string concatenation with +", status: complete, note: "Ex1, Ex2 correct first try. Ex3 (debugging, missing spaces): trace and fault both correctly named, but initial fix used console.log's comma-separated arguments instead of repairing the + chain — off the exercise's actual constraint; corrected on second attempt to a proper + rewrite. Ex4 (build, three variables): first attempt again used comma-arguments (masked by console.log's automatic inter-argument spacing), then the +-only rewrite had a missing operator (price \" each\") causing a syntax error; correct on third attempt. Pattern: pull toward console.log's comma syntax specifically when an exercise constrains the answer to + concatenation."}
+      - {n: 2, name: "template literals", status: complete, note: "Ex1 correct first try. Ex2: three attempts, all due to stray whitespace immediately inside the opening/closing backtick (leading space, then trailing space) not being visually distinct from intended content. Ex3 (debugging, quotes vs backticks): trace correct immediately; fault-fix (swap to backticks) correct, but the first explanation named the fix rather than the underlying mechanism (why double quotes don't interpolate) — landed precisely after one nudge. Ex4 (multi-line with \\n) correct first attempt; minor unflagged note on a stray space directly before \\n (same whitespace-adjacent-to-syntax category as Ex2)."}
+      - {n: 3, name: "string methods & properties", status: complete, note: "All four exercises correct first attempt — property (.length) vs. method (.toUpperCase()/.toLowerCase()) distinction applied correctly throughout, including Ex4 correctly reading .length off the original string rather than the uppercase result. Fault naming on the debugging exercise (Ex3) used canonical terminology (\"method\") unprompted. One terminology flag on Ex1 was later ruled out of scope — a Build exercise's code answer isn't required to include a description of method, and the flagged remark was incidental commentary, not a requested explanation — prompted v34.0.0 (narrowed Rule 11's flagging scope)."}
+      - {n: 4, name: "expressions inside ${}", status: complete, note: "All four exercises correct. Ex2 required one clarifying question (a method referenced without parentheses, e.g. shopName.toUpperCase with no calling syntax) resolved before submission. Ex3 (debugging, + vs * inside an expression) fault named precisely, using canonical term \"expression\" unprompted."}
+    final_exercises:
+      total: 5
+      completed: 5
+      note: "Ex1 (build, strings + Lesson 5 loops, targeting the for-loop-syntax watch): needed a full guided rebuild from scratch — commas instead of semicolons, loop counter reusing the fixed scenario variable daysOpen instead of a separate counter, a self-incrementing step written as days = days++ (misunderstanding that ++ already both increments and returns), and a body variable name mismatch (day vs days). This is a second occurrence of the same lapse from Lesson 6 final Ex3 — now a confirmed recurring pattern rather than a one-off. Aurora requested it be folded into Topic 8's warm-up rather than run as a standalone drill. Ex2 (build, strings + Lesson 6 functions, targeting the accumulator watch): accumulator pattern itself (separate initialization then a distinct add-step) was correct on the first attempt both times it was built; first attempt was missing the function call and log line entirely, added correctly once asked for the general form; a voluntary retry with new scenario values was completed fully unaided, including an accurate description of the call/store mechanism. No accumulator-reassignment error occurred this lesson. Ex3 (debugging, strings + Lesson 4 conditionals): fault-naming was correct overall (the two branches' assigned actions were swapped relative to the policy), but a genuine Claude process error occurred mid-exercise — an answer that happened to match the existing buggy code's behavior was confirmed as correct without cross-referencing the stated policy table; caught and corrected two messages later, prompted v35.0.0 (verify-before-stating now requires checking against the spec/policy specifically on debugging exercises, never against the code being debugged). Ex4 (debugging, strings + Lesson 4 switch) and Ex5 (build, all-variables/inline-expression) both solved correctly first attempt, no help needed."
+    scenario:
+      shopName: {value: "Widget World", meaning: "the name of the shop (reused from Lesson 6's widget-shop scenario)"}
+      price: {value: 4, meaning: "the cost of one widget"}
+      quantity: {value: 6, meaning: "default/order number of widgets"}
+      fee: {value: 2, meaning: "flat delivery charge, added once (Final Ex2, Ex3)"}
+      daysOpen: {value: 3, meaning: "number of days to loop over (Final Ex1)"}
+      speed: {value: "express", meaning: "shipping speed chosen (Final Ex4, switch)"}
+    template_versions_during_lesson: "Started at v31.0.0, ended at v35.0.0 — 5 mid-lesson rule changes this lesson (v32-v35): canonical-terminology mandate added to Rule 11 across two sessions of edits (v32, then a third clause in v33 alongside a reference-table format change), a wording-only stale-filename fix (v33.0.1), Rule 11's terminology-flagging scope narrowed to only apply when an explanation was actually requested (v34), and the verify-before-stating rule clarified for debugging exercises specifically (v35). Full detail in changelog.md."
+
   topic_6_functions:
     concepts:
       - {n: 1, name: "function declarations & calling", status: complete, note: "Build exercise correct first attempt. Debugging exercise 1 was delayed by a Claude process error (posted without the required correct-output list, then corrected mid-troubleshooting) — prompted v21.0.0. Once reissued properly, trace and fault both correct first attempt."}
@@ -94,9 +120,9 @@ completed_lessons:
           - "anything else is not a valid speed"
 
 recurring_patterns_flagged:
-  - "Describes what's happening accurately but uses non-canonical JavaScript terminology instead of the official term (e.g., 'return' used for what console.log does, i.e. logging/printing, not returning; 'literal expression' instead of 'string literal') — 2 occurrences, lesson 7 Concept 2 demo exercise, same session v32.0.0 (canonical-terminology rule) was added. Not yet a confirmed pattern past one exercise; watch starting Concept 3."
+  - "Describes what's happening accurately but uses non-canonical JavaScript terminology instead of the official term (e.g., 'return' used for what console.log does, i.e. logging/printing, not returning; 'literal expression' instead of 'string literal') — 2 occurrences, lesson 7 Concept 2 demo exercise, same session v32.0.0 (canonical-terminology rule) was added. No further occurrences the rest of lesson 7 in contexts where an explanation was actually requested — canonical terms ('method', 'expression') were used correctly and unprompted in later debugging fault-namings (Concept 3 Ex3, Concept 4 Ex3, Final Ex4's 'case'). Early days on a small sample; keep watching into lesson 8 before considering resolved."
   - "Stops after the trace on debugging exercises without naming the fault (largely resolved as of lesson 4)"
-  - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. No new occurrences in lesson 6. Aurora's explicit revisit request still stands until confirmed resolved."
+  - "Reassigns an accumulator instead of adding to its running value (e.g. totalValue = binValue * bin, weeklyTotal = sale + sale) — occurred 4 times across lesson 5 (boundary drill and for...of practice). Corrected cleanly each time once flagged; by lesson 5's final exercises was writing the accumulator correctly on first attempt without prompting. No new occurrences in lesson 6 or lesson 7 — lesson 7 final Ex2 built the accumulator pattern correctly on first attempt both times it was constructed, plus fully unaided on a voluntary retry with new values. Aurora's explicit revisit request still stands until she confirms resolved."
   - "Confuses break and continue in loop-control debugging exercises — occurred in both directions during Concept 4 of lesson 5 (break used where continue needed, and vice versa in a build exercise). Both correctly diagnosed and fixed with precise fault naming by end of concept."
   - "Names a cause without testing whether the fix produces the required output (2 occurrences, lesson 3)"
   - "Treats a stored variable as a live formula that updates when inputs change (5 occurrences, lesson 2; resolved by end of lesson 2)"
@@ -104,8 +130,8 @@ recurring_patterns_flagged:
   - "Output labels drift from the exact required spec while logic is correct (5 occurrences, lessons 1-3)"
   - "Mixes up which variable holds the whole collection vs. the current item vs. the running accumulator in for...of loops (1 occurrence, lesson 5 Concept 3 Exercise 1; resolved on second attempt same exercise)"
   - "When a debugging fix could land in more than one place, fixes by changing the call/argument instead of the actual broken declaration — occurred 3 times in a row in lesson 6 Concept 4 Exercise 3 (default-parameter fixes), each attempt breaking what the call was meant to test even though the number came out right. Resolved once exercises explicitly stated which code elements were fixed vs. changeable (prompted v29.0.0); correct unaided on the next exercise."
-  - "For-loop syntax (counter/condition/step) forgotten entirely — one occurrence, lesson 6 final Exercise 3, despite full mastery shown in lesson 5. Needed a complete guided rebuild from scratch. Worth a quick unprompted refresher early in a future lesson if it recurs; not yet a confirmed pattern on one occurrence."
+  - "For-loop syntax (counter/condition/step) forgotten entirely — now a confirmed recurring pattern (2 occurrences): lesson 6 final Exercise 3 (guided rebuild from scratch), and lesson 7 final Exercise 1 (guided rebuild again — commas instead of semicolons, counter reusing a fixed scenario variable instead of a separate name, a self-incrementing step written as days = days++ misunderstanding that ++ already both increments and returns, and a body variable name mismatch). Aurora requested this be folded into Topic 8's warm-up rather than run as a standalone drill — flag it there before starting Topic 8's own content."
   - "Assigns if/else branches to the wrong condition (discount/no-discount logic backwards relative to the stated policy) — one occurrence, lesson 6 final Exercise 2. Distinct from earlier lesson 4 conditional struggles (which were about output labels, not branch logic); corrected once the trace was walked through explicitly."
   - "Variable naming collision between a function-internal variable and an outer variable of the same name (both called `total`), causing a real runtime error — one occurrence, lesson 6 final Exercise 2. Corrected on the first explanation."
 
-next_action: "Say 'topic 7' to begin Strings & templates."
+next_action: "Say 'topic 8' to begin Arrays & indexing. Fold a quick for-loop syntax refresher into Topic 8's warm-up before starting its own content — confirmed recurring pattern, 2 occurrences (lesson 6 final Ex3, lesson 7 final Ex1)."

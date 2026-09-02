@@ -291,7 +291,7 @@ rule, both prompted by the same discussion:
   in prose.
 Requested directly by the learner.
 
-## v33.0.1 (current)
+## v33.0.1
 Wording fix: the "check for saved progress" rule still referred to
 the pre-v19.0.0 filename `lesson-config.yaml` in its heading and
 body, missed when that rename happened. Updated both references to
@@ -299,9 +299,48 @@ body, missed when that rename happened. Updated both references to
 change. Found via a cross-file naming audit requested by the
 learner.
 
+## v34.0.0
+Narrowed the scope of Rule 11's terminology-flagging clause
+(v32.0.0): it now only applies when an explanation, description, or
+fault-naming has actually been asked for — not to incidental
+commentary volunteered alongside an otherwise-correct code answer.
+Prompted by a Claude process error: a Build exercise (Concept 3
+Ex1) asked only for code, but a stray remark about the output
+("the result is 12") was flagged for imprecise terminology as if
+it were a requested description of method. Requested directly by
+the learner.
+
+## v35.0.0
+Clarified the verify-before-stating rule (v15.0.0): on debugging
+exercises, confirming the learner's fault-naming answers must check
+against the exercise's stated spec/policy, never against the broken
+code itself — matching the buggy code is not evidence of
+correctness. Prompted by a Claude process error: on a Topic 7 final
+exercise (conditionals policy debugging), a learner answer that
+happened to match the existing buggy code's behavior was confirmed
+as correct without cross-referencing the policy table, producing an
+incorrect confirmation that had to be walked back two messages
+later. Requested directly by the learner.
+
+## v36.0.0 (current)
+Added Rule 12 — Continuous exposure to prior material:
+- A running cumulative reference sheet spanning the whole course
+  (separate from each lesson's own Rule 6 table), one row per term
+  added as introduced, never edited or removed — shown at the end
+  of every lesson and on request. Pure exposure, no retrieval
+  demand, no exercise attached.
+- A standing requirement, folded into Rule 2's elaboration step, to
+  explicitly name genuine structural or mechanical echoes of older
+  material when a new concept has one — not just superficial topic
+  overlap, and not only when it happens to come up naturally.
+Prompted by a discussion on retention strategy beyond what Rule 8's
+final-exercises cross-lesson drawing already covers; the learner
+confirmed continuous exposure (not retrieval practice) is what
+actually works for them. Requested directly by the learner.
+
 ---
 
-Total: 11 original rules + 33 substantive amendments + 3 wording
-clarifications (portability, plain-language phrasing, stale
+Total: 12 original/added rules + 36 substantive amendments + 3
+wording clarifications (portability, plain-language phrasing, stale
 filename reference), made across this session.
-Current file: main_config-v33.0.1.md
+Current file: main_config-v36.0.0.md
