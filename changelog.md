@@ -322,7 +322,53 @@ as correct without cross-referencing the policy table, producing an
 incorrect confirmation that had to be walked back two messages
 later. Requested directly by the learner.
 
-## v36.0.0 (current)
+## v40.0.0 (current)
+Added a standing check: every version bump is now followed by a scan
+of all four files for stale non-changelog references to the old
+version number (e.g. a header comment naming the rules file, an
+illustrative filename example) before the files are presented —
+not just the header/footer fields that normally get updated by
+habit. Historical version mentions in the changelog and in
+user_config.yaml's past-lesson notes are explicitly exempt, since
+those correctly describe when something happened. Prompted directly
+by the learner after two such stale references were found by hand
+following the v39.0.0 bump.
+
+## v39.0.0
+Two changes, both requested in the same exchange:
+- Rule 9's repeated-mistake naming now happens silently as it's
+  tracked, and is only announced as a named pattern in the
+  end-of-concept report — no more mid-lesson callout on the second
+  occurrence.
+- Rule 7's per-concept exercises must now build in practice against
+  any open recurring-pattern watch relevant to the concept (the same
+  structural trigger that caused the mistake before), without naming
+  the pattern — naming stays reserved for the end-of-concept report.
+Requested directly by the learner, who wanted patterns still tracked
+and practiced against, just not surfaced until the report.
+
+## v38.0.0
+Added a standing rule: exercise requirements and requirement
+clarifications must be self-contained — no backward references to
+past exercises or past mistakes within instructions (e.g. "don't
+repeat the Exercise 1 mix-up"). Scoped to instructions and
+clarifications only; does not change Rule 9's feedback step, which
+still names repeated mistakes as a pattern after a submission.
+Prompted directly by the learner, who found backward references
+inside instructions made the current assignment harder to track.
+Requested directly by the learner.
+
+## v37.0.0
+Added a standing rule: don't insert a dedicated warm-up drill for a
+recurring-pattern watch at the start of a lesson. Watches get
+addressed through Rule 8's final exercises (which already prioritize
+open-watch topics), not a standalone drill bolted onto the front of
+the next lesson. Prompted after a for-loop-syntax warm-up was
+inserted ahead of Topic 8's own content; the learner asked for it
+removed, both this once and as a standing rule going forward.
+Requested directly by the learner.
+
+## v36.0.0
 Added Rule 12 — Continuous exposure to prior material:
 - A running cumulative reference sheet spanning the whole course
   (separate from each lesson's own Rule 6 table), one row per term
@@ -340,7 +386,7 @@ actually works for them. Requested directly by the learner.
 
 ---
 
-Total: 12 original/added rules + 36 substantive amendments + 3
+Total: 12 original/added rules + 40 substantive amendments + 3
 wording clarifications (portability, plain-language phrasing, stale
 filename reference), made across this session.
-Current file: main_config-v36.0.0.md
+Current file: main_config-v40.0.0.md

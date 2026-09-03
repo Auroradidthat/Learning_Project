@@ -1,12 +1,12 @@
 # User Configuration
 # Holds per-lesson state: topic, scenario, progress.
-# The main config (main_config-v36.0.0.md) holds the fixed rules.
+# The main config (main_config-v40.0.0.md) holds the fixed rules.
 # Update this file each lesson; the main config should rarely change.
 
 course:
   name: "JavaScript Fundamentals"
   learner: "Aurora"
-  template_version: "36.0.0"
+  template_version: "40.0.0"
 
 learning_map:
   tiers:
@@ -130,8 +130,8 @@ recurring_patterns_flagged:
   - "Output labels drift from the exact required spec while logic is correct (5 occurrences, lessons 1-3)"
   - "Mixes up which variable holds the whole collection vs. the current item vs. the running accumulator in for...of loops (1 occurrence, lesson 5 Concept 3 Exercise 1; resolved on second attempt same exercise)"
   - "When a debugging fix could land in more than one place, fixes by changing the call/argument instead of the actual broken declaration — occurred 3 times in a row in lesson 6 Concept 4 Exercise 3 (default-parameter fixes), each attempt breaking what the call was meant to test even though the number came out right. Resolved once exercises explicitly stated which code elements were fixed vs. changeable (prompted v29.0.0); correct unaided on the next exercise."
-  - "For-loop syntax (counter/condition/step) forgotten entirely — now a confirmed recurring pattern (2 occurrences): lesson 6 final Exercise 3 (guided rebuild from scratch), and lesson 7 final Exercise 1 (guided rebuild again — commas instead of semicolons, counter reusing a fixed scenario variable instead of a separate name, a self-incrementing step written as days = days++ misunderstanding that ++ already both increments and returns, and a body variable name mismatch). Aurora requested this be folded into Topic 8's warm-up rather than run as a standalone drill — flag it there before starting Topic 8's own content."
+  - "For-loop syntax (counter/condition/step) forgotten entirely — now a confirmed recurring pattern (2 occurrences): lesson 6 final Exercise 3 (guided rebuild from scratch), and lesson 7 final Exercise 1 (guided rebuild again — commas instead of semicolons, counter reusing a fixed scenario variable instead of a separate name, a self-incrementing step written as days = days++ misunderstanding that ++ already both increments and returns, and a body variable name mismatch). A dedicated warm-up drill was started at the top of Topic 8 but abandoned mid-exercise at Aurora's request, who also asked that recurring-pattern warm-ups not be inserted this way going forward (prompted v37.0.0). Address this watch instead through Topic 8's final exercises per Rule 8, which already prioritizes open-watch topics."
   - "Assigns if/else branches to the wrong condition (discount/no-discount logic backwards relative to the stated policy) — one occurrence, lesson 6 final Exercise 2. Distinct from earlier lesson 4 conditional struggles (which were about output labels, not branch logic); corrected once the trace was walked through explicitly."
   - "Variable naming collision between a function-internal variable and an outer variable of the same name (both called `total`), causing a real runtime error — one occurrence, lesson 6 final Exercise 2. Corrected on the first explanation."
 
-next_action: "Say 'topic 8' to begin Arrays & indexing. Fold a quick for-loop syntax refresher into Topic 8's warm-up before starting its own content — confirmed recurring pattern, 2 occurrences (lesson 6 final Ex3, lesson 7 final Ex1)."
+next_action: "Begin Topic 8 (Arrays & indexing) Concept 1 directly — no warm-up drill. The for-loop-syntax watch (2 occurrences) carries forward to be addressed in Topic 8's final exercises per Rule 8, not a standalone drill."
